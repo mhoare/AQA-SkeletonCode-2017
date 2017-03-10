@@ -9,6 +9,8 @@ This repository is used to store code related to the AQA Computer Science A2 Pap
 
 ## Building and running
 
+Before building for first time: `mkdir dist` 
+
 To build: `make`
 
 To run: `mono dist/PredatorPrey.exe`
