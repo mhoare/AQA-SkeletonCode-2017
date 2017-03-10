@@ -12,15 +12,25 @@ Module PredatorPrey
         Dim InitialFoxCount As Integer
         Dim Variability As Integer
         Dim FixedInitialLocations As Boolean
-        Do
-            Console.WriteLine("Predator Prey Simulation Main Menu")
-            Console.WriteLine()
-            Console.WriteLine("1. Run simulation with default settings")
-            Console.WriteLine("2. Run simulation with custom settings")
-            Console.WriteLine("3. Exit")
-            Console.WriteLine()
-            Console.Write("Select option: ")
-            MenuOption = CInt(Console.ReadLine())
+	Dim Valid As Boolean
+	Do
+		Do
+		    Console.WriteLine("Predator Prey Simulation Main Menu")
+		    Console.WriteLine()
+		    Console.WriteLine("1. Run simulation with default settings")
+		    Console.WriteLine("2. Run simulation with custom settings")
+		    Console.WriteLine("3. Exit")
+		    Console.WriteLine()
+		    Console.Write("Select option: ")
+		    Try
+			MenuOption = CInt(Console.ReadLine())
+			Valid = True
+		    Catch ex As Exception
+			Console.WriteLine("")	
+			Console.WriteLine("Please enter a valid option")
+			Valid = False
+	    	    End Try
+		Loop While Not Valid
             If MenuOption = 1 Or MenuOption = 2 Then
                 If MenuOption = 1 Then
                     LandscapeSize = 15
@@ -29,14 +39,10 @@ Module PredatorPrey
                     Variability = 0
                     FixedInitialLocations = True
                 Else
-                    Console.Write("Landscape Size: ")
-                    LandscapeSize = CInt(Console.ReadLine())
-                    Console.Write("Initial number of warrens: ")
-                    InitialWarrenCount = CInt(Console.ReadLine())
-                    Console.Write("Initial number of foxes: ")
-                    InitialFoxCount = CInt(Console.ReadLine())
-                    Console.Write("Randomness variability (percent): ")
-                    Variability = CInt(Console.ReadLine())
+		    LandscapeSize = GetIntegerInput("Landscape Size: ")
+		    InitialWarrenCount = GetIntegerInput("Initial number of warrens: ")
+                    InitialFoxCount = GetIntegerInput("Initial number of foxes: ")
+                    Variability = GetIntegerInput("Randomness variability (percent): ")
                     FixedInitialLocations = False
                 End If
                 Dim Sim As New Simulation(LandscapeSize, InitialWarrenCount, InitialFoxCount, Variability, FixedInitialLocations)
@@ -44,6 +50,23 @@ Module PredatorPrey
         Loop While MenuOption <> 3
         Console.ReadKey()
     End Sub
+
+    Function GetIntegerInput(ByRef Output as String)
+	Dim Valid As Integer
+	Dim UserInput As Integer
+	Valid = False
+	Do 
+		Console.Write(Output)
+		Try
+			UserInput = CInt(Console.ReadLine())
+			Valid = True
+		Catch ex As Exception
+			Console.WriteLine("")
+			Valid = False
+		End Try
+	Loop While Not Valid
+	Return UserInput
+    End Function
 
     Class Location
         Public Fox As Fox
