@@ -119,8 +119,8 @@ Module PredatorPrey
                 Console.WriteLine("4. Inspect warren")
                 Console.WriteLine("5. Exit")
                 Console.WriteLine()
-                Console.Write("Select option: ")
-                MenuOption = CInt(Console.ReadLine())
+		''' Ensure int is entered
+		MenuOption = GetIntegerInput("Select option: ") 
                 If MenuOption = 1 Then
                     TimePeriod += 1
                     ShowDetail = True
