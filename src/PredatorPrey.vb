@@ -40,8 +40,21 @@ Module PredatorPrey
                     FixedInitialLocations = True
                 Else
 		    LandscapeSize = GetIntegerInput("Landscape Size: ")
+
+		    ' Get valid number of warrens 
 		    InitialWarrenCount = GetIntegerInput("Initial number of warrens: ")
-                    InitialFoxCount = GetIntegerInput("Initial number of foxes: ")
+		    Do While InitialWarrenCount > LandscapeSize ^ 2
+			    Console.WriteLine("The number of warrens you specified exceeds the size of the board. Please enter a valid number of warrens")
+			    InitialWarrenCount = GetIntegerInput("Initial number of warrens: ")
+		    Loop 
+
+		    ' Get valid number of foxes
+		    InitialFoxCount = GetIntegerInput("Initial number of foxes: ")
+		    Do While InitialFoxCount > LandscapeSize ^ 2
+			    Console.WriteLine("The number of foxes you specified exceeds the size of the board. Please enter a valid number of foxes")
+			    InitialFoxCount = GetIntegerInput("Initial number of foxes: ")
+		    Loop
+
                     Variability = GetIntegerInput("Randomness variability (percent): ")
                     FixedInitialLocations = False
                 End If
