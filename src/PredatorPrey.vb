@@ -136,6 +136,8 @@ Module PredatorPrey
                     y = InputCoordinate("y")
                     If Not Landscape(x, y).Fox Is Nothing Then
                         Landscape(x, y).Fox.Inspect()
+		    Else
+			Console.WriteLine("Cell ({0}, {1}) does not contain a fox", x, y)
                     End If
                 End If
                 If MenuOption = 4 Then
