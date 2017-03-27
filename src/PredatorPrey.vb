@@ -132,11 +132,13 @@ Module PredatorPrey
                     AdvanceTimePeriod()
                 End If
                 If MenuOption = 3 Then
-                    x = InputCoordinate("x")
-                    y = InputCoordinate("y")
-                    If Not Landscape(x, y).Fox Is Nothing Then
-                        Landscape(x, y).Fox.Inspect()
-                    End If
+		    Do
+			    x = InputCoordinate("x")
+			    y = InputCoordinate("y")
+			    If Landscape(x, y).Fox Is Nothing Then
+				Console.WriteLine("Cell ({0}, {1}) does not contain a fox", x, y)
+			    End If
+	    	    Loop While Landscape(x, y).Fox is Nothing
                 End If
                 If MenuOption = 4 Then
                     x = InputCoordinate("x")
