@@ -84,6 +84,7 @@ Module PredatorPrey
             DrawLandscape()
             Do
                 Console.WriteLine()
+                Console.WriteLine("0. Advance 10 time periods hiding detail")
                 Console.WriteLine("1. Advance to next time period showing detail")
                 Console.WriteLine("2. Advance to next time period hiding detail")
                 Console.WriteLine("3. Inspect fox")
@@ -92,6 +93,13 @@ Module PredatorPrey
                 Console.WriteLine()
                 Console.Write("Select option: ")
                 MenuOption = CInt(Console.ReadLine())
+		If MenuOption = 0 Then
+			For i = 0 To 9
+				TimePeriod += 1
+				ShowDetail = False
+				AdvanceTimePeriod()
+			Next
+		End If
                 If MenuOption = 1 Then
                     TimePeriod += 1
                     ShowDetail = True
