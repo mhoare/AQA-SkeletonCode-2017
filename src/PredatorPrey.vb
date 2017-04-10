@@ -343,6 +343,20 @@ Module PredatorPrey
         End Sub
     End Class
 
+    Class GiantWarren
+	Inherits Warren
+        Public Sub New(ByVal Variability As Integer, ByVal RabbitCount As Integer)
+	    MyBase.New(Variability)
+            Me.Variability = Variability
+            Me.RabbitCount = RabbitCount
+            Rabbits = New Rabbit(200) {}
+            For r = 0 To RabbitCount - 1
+                Rabbits(r) = New Rabbit(Variability)
+            Next
+        End Sub
+
+    End Class
+
     Class Warren
         Private Const MaxRabbitsInWarren As Integer = 99
         Private Rabbits() As Rabbit
