@@ -1,4 +1,4 @@
-# AQA Computer Science PredatorPrey
+# AQA Computer Science PredatorPrey :rabbit: vs :wolf:
 
 This repository is used to store code related to the AQA Computer Science A2 Paper 1 Exam for 2017.
 
@@ -7,7 +7,7 @@ This repository is used to store code related to the AQA Computer Science A2 Pap
 * Install Mono
 * Ensure `PATH` environment variable includes mono libraries
 
-## Building and running
+## Building and running :wrench:
 
 Before building for first time: `mkdir dist` 
 
