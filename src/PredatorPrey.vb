@@ -573,14 +573,24 @@ Module PredatorPrey
 
     Class Fox
         Inherits Animal
+        Enum Genders
+            Male
+            Female
+        End Enum
         Private FoodUnitsNeeded As Integer = 10
         Private FoodUnitsConsumedThisPeriod As Integer = 0
         Private Const DefaultLifespan As Integer = 7
         Private Const DefaultProbabilityDeathOtherCauses As Double = 0.1
+        Private Gender As Genders
 
         Public Sub New(ByVal Variability As Integer)
             MyBase.New(DefaultLifespan, DefaultProbabilityDeathOtherCauses, Variability)
             FoodUnitsNeeded = CInt(10 * MyBase.CalculateRandomValue(100, Variability) / 100)
+            If Rnd.Next(0, 2) < 1 Then
+                Gender = Genders.Male
+            Else
+                Gender = Genders.Female
+            End If
         End Sub
 
         Public Sub AdvanceGeneration(ByVal ShowDetail As Boolean)
@@ -618,6 +628,9 @@ Module PredatorPrey
 
         Public Function ReproduceThisPeriod() As Boolean
             Const ReproductionProbability As Double = 0.25
+	    If Gender = Genders.Male Then
+		    Return False
+	    End If
             If Rnd.Next(0, 100) < ReproductionProbability * 100 Then
                 Return True
             Else
@@ -633,6 +646,11 @@ Module PredatorPrey
             MyBase.Inspect()
             Console.Write("Food needed " & FoodUnitsNeeded & " ")
             Console.Write("Food eaten " & FoodUnitsConsumedThisPeriod & " ")
+            If Gender = Genders.Female Then
+                Console.WriteLine("Gender Female")
+            Else
+                Console.WriteLine("Gender Male")
+            End If
             Console.WriteLine()
         End Sub
     End Class
