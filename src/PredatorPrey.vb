@@ -649,10 +649,11 @@ Module PredatorPrey
         Private Const DefaultProbabilityDeathOtherCauses As Double = 0.05
         Private Gender As Genders
 
-        Public Sub New(ByVal Variability As Integer)
+        Public Sub New(ByVal Variability As Integer, Optional ByVal genderRatio as Integer = 50)
+	
             MyBase.New(DefaultLifespan, DefaultProbabilityDeathOtherCauses, Variability)
             ReproductionRate = DefaultReproductionRate * MyBase.CalculateRandomValue(100, Variability) / 100
-            If Rnd.Next(0, 100) < 50 Then
+            If Rnd.Next(0, 100) < genderRatio Then
                 Gender = Genders.Male
             Else
                 Gender = Genders.Female
