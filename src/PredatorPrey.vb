@@ -17,18 +17,19 @@ Module PredatorPrey
             Console.WriteLine()
             Console.WriteLine("1. Run simulation with default settings")
             Console.WriteLine("2. Run simulation with custom settings")
-            Console.WriteLine("3. Exit")
+            Console.WriteLine("3. Rabbit Paradise")
+            Console.WriteLine("4. Exit")
             Console.WriteLine()
             Console.Write("Select option: ")
             MenuOption = CInt(Console.ReadLine())
-            If MenuOption = 1 Or MenuOption = 2 Then
+            If MenuOption = 1 Or MenuOption = 2 Or MenuOption = 3 Then
                 If MenuOption = 1 Then
                     LandscapeSize = 15
                     InitialWarrenCount = 5
                     InitialFoxCount = 5
                     Variability = 0
                     FixedInitialLocations = True
-                Else
+	    	Else If MenuOption = 2 Then
                     Console.Write("Landscape Size: ")
                     LandscapeSize = CInt(Console.ReadLine())
                     Console.Write("Initial number of warrens: ")
@@ -38,10 +39,16 @@ Module PredatorPrey
                     Console.Write("Randomness variability (percent): ")
                     Variability = CInt(Console.ReadLine())
                     FixedInitialLocations = False
+	    	Else
+                    LandscapeSize = 20 
+                    InitialWarrenCount = 20
+                    InitialFoxCount = 0
+                    Variability = 1
+                    FixedInitialLocations = False
                 End If
                 Dim Sim As New Simulation(LandscapeSize, InitialWarrenCount, InitialFoxCount, Variability, FixedInitialLocations)
             End If
-        Loop While MenuOption <> 3
+        Loop While MenuOption <> 4
         Console.ReadKey()
     End Sub
 
