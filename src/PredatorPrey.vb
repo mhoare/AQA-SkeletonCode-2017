@@ -224,6 +224,7 @@ Module PredatorPrey
                 Landscape(9, 7).Warren = New Warren(Variability, 20)
                 Landscape(10, 3).Warren = New Warren(Variability, 52)
                 Landscape(13, 4).Warren = New Warren(Variability, 67)
+		Landscape(11,4).Warren = New GiantWarren(Variability, 115)
                 WarrenCount = 5
                 Landscape(2, 10).Fox = New Fox(Variability)
                 Landscape(6, 1).Fox = New Fox(Variability)
@@ -343,14 +344,28 @@ Module PredatorPrey
         End Sub
     End Class
 
+    Class GiantWarren
+	Inherits Warren
+        Public Sub New(ByVal Variability As Integer, ByVal RabbitCount As Integer)
+	    MyBase.New(Variability)
+            Me.Variability = Variability
+            Me.RabbitCount = RabbitCount
+            Rabbits = New Rabbit(200) {}
+            For r = 0 To RabbitCount - 1
+                Rabbits(r) = New Rabbit(Variability)
+            Next
+        End Sub
+
+    End Class
+
     Class Warren
-        Private Const MaxRabbitsInWarren As Integer = 99
-        Private Rabbits() As Rabbit
-        Private RabbitCount As Integer = 0
-        Private PeriodsRun As Integer = 0
-        Private AlreadySpread As Boolean = False
-        Private Variability As Integer
-        Private Shared Rnd As New Random()
+        Protected Const MaxRabbitsInWarren As Integer = 99
+        Protected Rabbits() As Rabbit
+        Protected RabbitCount As Integer = 0
+        Protected PeriodsRun As Integer = 0
+        Protected AlreadySpread As Boolean = False
+        Protected Variability As Integer
+        Protected Shared Rnd As New Random()
 
         Public Sub New(ByVal Variability As Integer)
             Me.Variability = Variability
