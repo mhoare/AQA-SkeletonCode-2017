@@ -738,6 +738,11 @@ Module PredatorPrey
             End If
         End Sub
 
+        Public Overrides Sub CalculateNewAge()
+	    MyBase.CalculateNewAge()
+	    ProbabilityOfDeathOtherCauses = ProbabilityOfDeathOtherCauses * 1.1
+        End Sub
+
         Public Overrides Sub Inspect()
             MyBase.Inspect()
             Console.Write("Rep rate " & Math.Round(ReproductionRate, 1) & " ")
