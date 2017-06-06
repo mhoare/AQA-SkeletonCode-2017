@@ -90,6 +90,7 @@ Module PredatorPrey
                 Console.WriteLine("3. Inspect fox")
                 Console.WriteLine("4. Inspect warren")
                 Console.WriteLine("5. Exit")
+	    	Console.WriteLine("6. Find biggest warren")
                 Console.WriteLine()
                 Console.Write("Select option: ")
                 MenuOption = CInt(Console.ReadLine())
@@ -129,6 +130,9 @@ Module PredatorPrey
                         End If
                     End If
                 End If
+		If MenuOption = 6 Then
+			findBiggest()
+		End If
             Loop While (WarrenCount > 0 Or FoxCount > 0) And MenuOption <> 5
             Console.ReadKey()
         End Sub
@@ -212,6 +216,23 @@ Module PredatorPrey
             Console.WriteLine()
         End Sub
 
+	Public Sub findBiggest()
+		largestx = 0
+		largesty = 0
+		largestsize = 0
+		For x = 0 To LandscapeSize - 1
+		    For y = 0 To LandscapeSize - 1
+		        If Not Landscape(x, y).Warren Is Nothing Then
+				If Landscape(x, y).Warren.GetRabbitCount() > largestsize Then
+					largestsize = Landscape(x, y).Warren.GetRabbitCount()
+					largestx = x
+					largesty = y
+				End If
+		        End If
+		    Next
+		Next
+		Console.WriteLine("Biggest Warren at ({0},{1})", largestx, largesty)
+	End Sub
         Private Sub CreateLandscapeAndAnimals(ByVal InitialWarrenCount As Integer, ByVal InitialFoxCount As Integer, ByVal FixedInitialLocations As Boolean)
             For x = 0 To LandscapeSize - 1
                 For y = 0 To LandscapeSize - 1
