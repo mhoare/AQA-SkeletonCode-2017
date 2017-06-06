@@ -341,6 +341,7 @@ Module PredatorPrey
                 Next
                 Console.WriteLine()
             Next
+	    Console.WriteLine("The average life expectancy of a fox stands at {0}",Fox.getLifeExpect())
         End Sub
     End Class
 
@@ -592,6 +593,8 @@ Module PredatorPrey
             Male
             Female
         End Enum
+	Public Shared _TotalDeadFoxes As Integer = 0
+	Public Shared _TotalFoxAge As Integer = 0
         Private FoodUnitsNeeded As Integer = 10
         Private FoodUnitsConsumedThisPeriod As Integer = 0
         Private Const DefaultLifespan As Integer = 7
@@ -608,15 +611,26 @@ Module PredatorPrey
             End If
         End Sub
 
+	Public Shared Function getLifeExpect()
+		If _TotalDeadFoxes = 0 Then
+			Return 7
+		End If
+		Return _TotalFoxAge / _TotalDeadFoxes
+	End Function 
+
         Public Sub AdvanceGeneration(ByVal ShowDetail As Boolean)
             If FoodUnitsConsumedThisPeriod = 0 Then
                 IsAlive = False
+		_TotalDeadFoxes += 1
+		_TotalFoxAge += Age
                 If ShowDetail Then
                     Console.WriteLine("  Fox dies as has eaten no food this period.")
                 End If
             Else
                 If CheckIfKilledByOtherFactor() Then
                     IsAlive = False
+		    _TotalDeadFoxes += 1
+		    _TotalFoxAge += Age
                     If ShowDetail Then
                         Console.WriteLine("  Fox killed by other factor.")
                     End If
