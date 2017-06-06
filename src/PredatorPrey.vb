@@ -91,6 +91,7 @@ Module PredatorPrey
                 Console.WriteLine("4. Inspect warren")
                 Console.WriteLine("5. Exit")
 	    	Console.WriteLine("6. Find biggest warren")
+		Console.WriteLine("7. Inspect all rabbits")
                 Console.WriteLine()
                 Console.Write("Select option: ")
                 MenuOption = CInt(Console.ReadLine())
@@ -133,9 +134,27 @@ Module PredatorPrey
 		If MenuOption = 6 Then
 			findBiggest()
 		End If
+		If MenuOption = 7 Then
+			inspectAllRabbits()
+		End If
             Loop While (WarrenCount > 0 Or FoxCount > 0) And MenuOption <> 5
             Console.ReadKey()
         End Sub
+
+	Private Function inspectAllRabbits()
+		Dim WarrenRabbits() As Rabbit
+		For x = 0 To LandscapeSize - 1
+		    For y = 0 To LandscapeSize - 1
+		        If Not Landscape(x, y).Warren Is Nothing Then
+				Console.WriteLine("Warren at ({0},{1})", x, y)
+				WarrenRabbits = Landscape(x, y).Warren.GetRabbits()
+				For r = 0 To Landscape(x, y).Warren.GetRabbitCount() - 1 
+					WarrenRabbits(r).Inspect()
+				Next
+		        End If
+		    Next
+		Next
+	End Function
 
         Private Function InputCoordinate(ByVal CoordinateName As Char) As Integer
             Dim Coordinate As Integer
@@ -449,6 +468,10 @@ Module PredatorPrey
                 Console.WriteLine("  All rabbits in warren are dead")
             End If
         End Sub
+
+	Public Function GetRabbits() As Rabbit()
+		Return Rabbits
+	End Function
 
         Public Function EatRabbits(ByVal RabbitsToEat As Integer) As Integer
             Dim DeathCount As Integer = 0
